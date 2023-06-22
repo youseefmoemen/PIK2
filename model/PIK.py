@@ -92,7 +92,6 @@ class PIK:
     def generate_text(self, beam_size):
         context_tokens = self.lm_tokenizer.encode(self.context_prefix + 'Image of a')
         context_tokens = torch.tensor(context_tokens, device=self.device, dtype=torch.long).unsqueeze(0)
-        print(f'context_tokens.shape {context_tokens.shape}')
         gen_tokens = None
         scores = None
         seq_lengths = torch.ones(beam_size, device=self.device)
@@ -142,7 +141,7 @@ class PIK:
             ]
             tmp_order = tmp_scores.argsort(descending=True)
             tmp_output_texts = [tmp_output_texts[i] + ' %% ' + str(tmp_scores[i].cpu().numpy()) for i in tmp_order]
-            log_info(tmp_output_texts, verbose=True)
+            # log_info(tmp_output_texts, verbose=True)
             ####
 
             if is_stopped.all():
@@ -167,7 +166,6 @@ class PIK:
         # Logits of LM model with unshifited context
 
         logits_before_shift = self.lm_model(context_tokens)["logits"]
-        print(f'Logits_before_shift.shape {logits_before_shift.shape}')
         logits_before_shift = logits_before_shift[:, -1, :]
         probs_before_shift = nn.functional.softmax(logits_before_shift, dim=-1)
 

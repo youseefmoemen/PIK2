@@ -19,7 +19,7 @@ def answer(caption, question):
     response = openai.Completion.create(
         engine='text-davinci-003',
         prompt=prompt,
-        max_token=100,
+        max_tokens=100,
     )
     return response
 
