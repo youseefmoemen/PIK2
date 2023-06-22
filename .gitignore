@@ -1,0 +1,14 @@
+### Example user template template
+### Example user template
+
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
+clip_models/ViT-B-16.pt
+clip_models/ViT-B-32.pt
+cuda-keyring_1.0-1_all.deb
+clip_models/*
+clip_models
+model/__pycache__/PIK.cpython-38.pyc
