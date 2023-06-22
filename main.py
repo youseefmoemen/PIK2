@@ -12,16 +12,29 @@ def read_video(video_path):
     return video_frames
 
 
+def answer(caption, question):
+    openai.api_key = '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'
+    prompt = f'Answer the question using the caption ' \
+             f'Question: {question}, caption: {caption}'
+    response = openai.Completion.create(
+        engine='text-davinci-003',
+        prompt=prompt,
+        max_token=100,
+    )
+    return response
+
+
 if __name__ == '__main__':
     path = 'video_samples/test1.mp4'
+    q = 'what is the animal ?'
     frames = read_video(path)
     print(frames.shape)
     pik = PIK()
-    result = pik.video_qa(frames, 'What?')
-    print('Final result')
-    caption = ''
+    result = pik.video_qa(frames, q)
+    cap = ''
     for i in result:
-        caption += ' ' + i
+        cap += ' ' + i
 
-    print(caption)
-
+    print(f'Final caption: {cap}')
+    final_answer = answer(cap, q)
+    print(f'question answer: {final_answer}')
