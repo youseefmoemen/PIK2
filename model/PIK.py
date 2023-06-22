@@ -209,17 +209,17 @@ class PIK:
             loss = 0.0
             ce_loss = 0
             # Iterative Consensus
-            tokens_losses = []
+            tokens_losses = torch.zeros(self.beam_size)
             for c in self.clips:
                 total_loss, tokens_losses_tmp = self.clip_loss(probs, context_tokens, c)
-                tokens_losses.extend(tokens_losses_tmp)
+                tokens_losses += torch.tensor(tokens_losses_tmp)
                 loss += self.clip_scale * total_loss
                 ce_loss = self.ce_scale * ((probs * probs.log()) - (probs * probs_before_shift.log())).sum(-1)
                 loss += ce_loss.sum()
-                loss.backward()
+            loss.backward()
 
             combined_scores_k = -ce_loss
-            combined_scores_c = -(self.clip_scale * torch.stack(tokens_losses))
+            combined_scores_c = -(self.clip_scale * tokens_losses)
 
             if combined_scores_k.shape[0] == 1:
                 tmp_weights_c = tmp_weights_k = torch.ones(*combined_scores_k.shape).to(self.device)
@@ -229,8 +229,8 @@ class PIK:
                 tmp_weights_c = (combined_scores_c - combined_scores_c.min()) / (
                         combined_scores_c.max() - combined_scores_c.min())
 
-            tmp_weights = 0.5 * tmp_weights_k + 0.5 * tmp_weights_c
-            tmp_weights = tmp_weights.view(tmp_weights.shape[0], 1, 1, 1)
+            tmp_weights = 0.5 * tmp_weights_k.to(self.device) + 0.5 * tmp_weights_c.to(self.device)
+            tmp_weights = tmp_weights.view(tmp_weights.shape[0], 1, 1, 1).to(self.device)
             factor = 1
 
             # --------- Specific Gen ---------
@@ -315,7 +315,7 @@ class PIK:
         return clip_loss, losses
 
     def get_txt_features(self, text):
-        clip_texts = self.clips[0].tokenize(text).to(self.device)
+        clip_texts = clip.tokenize(text).to(self.device)
 
         with torch.no_grad():
             text_features = self.clips[0].encode_text(clip_texts)
