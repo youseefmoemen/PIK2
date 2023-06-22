@@ -33,7 +33,7 @@ if __name__ == '__main__':
     result = pik.video_qa(frames, q)
     cap = ''
     for i in result:
-        cap += ' ' + i
+        cap += ' ' + i[-1]
 
     print(f'Final caption: {cap}')
     final_answer = answer(cap, q)
