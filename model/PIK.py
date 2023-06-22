@@ -70,7 +70,8 @@ class PIK:
         video_features = self.get_video_features(video)
         # print(f'video_features.shape {self.frames_fts.shape}') num.frames * num.clips * 1 * 512
         output_text_conc = []
-        for frame in video_features:
+        for idx, frame in enumerate(video_features):
+            print(f'Captioning Frame {idx+1 / video_features.shape[0]}')
             self.curr_frame_fts = frame
             output_tokens, output_text = self.generate_text(self.beam_size)
             output_text_conc.append(output_text)
