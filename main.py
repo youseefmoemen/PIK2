@@ -19,8 +19,9 @@ if __name__ == '__main__':
     pik = PIK()
     result = pik.video_qa(frames, 'What?')
     print('Final result')
-    print('Len.results: ', len(result))
-    print('----------------')
+    caption = ''
     for i in result:
-        print(len(i))
-        print(i)
+        caption += ' ' + i
+
+    print(caption)
+
