@@ -9,7 +9,8 @@ def read_video(video_path):
     video_reader = torchvision.io.VideoReader(video_path, stream)
     fms = [frame['data'] for frame in video_reader]
     video_frames = torch.stack(fms)
-    return video_frames
+    selected_frames = [video_frames[i] for i in range(0, video_frames.shape[0], 30)]
+    return torch.stack(selected_frames)
 
 
 def answer(caption, question):
@@ -32,8 +33,8 @@ if __name__ == '__main__':
     pik = PIK()
     result = pik.video_qa(frames, q)
     cap = ''
-    for i in result:
-        cap += ' ' + i[-1]
+    for c in result:
+        cap += ' ' + c[-1]
 
     print(f'Final caption: {cap}')
     final_answer = answer(cap, q)
