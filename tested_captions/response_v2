@@ -1,0 +1,19 @@
+question answer: {
+  "id": "cmpl-7UhPCQEQoMnLM3UUNBE2CtYwkrLt1",
+  "object": "text_completion",
+  "created": 1687551046,
+  "model": "text-davinci-003",
+  "choices": [
+    {
+      "text": "  Pizza in the video, is the \"Onion Ring Pizza,\" which is made with  pepperoni, mushrooms, cheese, and a variety of other toppings. The pizza is served with a side of ranch dressing.",
+      "index": 0,
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 461,
+    "completion_tokens": 45,
+    "total_tokens": 506
+  }
+}
