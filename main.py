@@ -26,8 +26,8 @@ def answer(caption, question):
 
 
 if __name__ == '__main__':
-    path = 'video_samples/test1.mp4'
-    q = 'what is the animal ?'
+    path = 'video_samples/test2.mp4'
+    q = 'what is the ingredients in the pizza?'
     frames = read_video(path)
     print(frames.shape)
     pik = PIK()
