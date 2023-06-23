@@ -1,0 +1,19 @@
+question answer: {
+  "id": "cmpl-7UeCBom2N77o23hz7ebdPif8C4PpK",
+  "object": "text_completion",
+  "created": 1687538707,
+  "model": "text-davinci-003",
+  "choices": [
+    {
+      "text": "\n\nThe bizarre recipe video posted on the Internet shows a pizza being made with a variety of ingredients, including tomato sauce, cheese, pepperoni, mushrooms, olives, and onions.",
+      "index": 0,
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 422,
+    "completion_tokens": 38,
+    "total_tokens": 460
+  }
+}

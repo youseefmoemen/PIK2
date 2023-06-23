@@ -13,7 +13,7 @@ def read_video(video_path):
 
 
 if __name__ == '__main__':
-    path = 'video_samples/test2.mp4'
+    path = 'video_samples/test3.mp4'
     frames = read_video(path)
     for i in range(frames.shape[0]):
         plt.imshow(frames[i].permute(1, 2, 0))

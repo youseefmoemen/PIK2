@@ -1,16 +1,24 @@
 import openai
 
-openai.api_key = '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'
+openai.api_key = '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'
 
+caption = ""
+with open('pizza_caption_v1', mode='r') as f:
+    for line in f:
+        caption += ' ' + line
 
-prompt = 'What is the animal given the following text a lovely fat cat sitting in the couch lovely fat cat sitting in ' \
-         'the couch'
+question = 'What is the chef cooking in the video ?'
+prompt = f"the following text is video caption answer the following question:  {question} using the provided " \
+         f"caption: {caption}"
 
-response = openai.Completion.create(
-    engine='text-davinci-003',  # Specify the GPT-3 engine
-    prompt=prompt,
-    max_tokens=100  # Specify the desired length of the generated completion
+messages = [{
+    'role': 'user',
+    'content': prompt
+}]
+
+chat = openai.ChatCompletion.create(
+    model="gpt-3.5-turbo", messages=messages
 )
+reply = chat.choices[0].message.content
 
-completion_text = response.choices[0].text.strip()
-print(completion_text)
+print(reply)
