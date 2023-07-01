@@ -9,7 +9,7 @@ def read_video(video_path):
     video_reader = torchvision.io.VideoReader(video_path, stream)
     fms = [frame['data'] for frame in video_reader]
     video_frames = torch.stack(fms)
-    selected_frames = [video_frames[i] for i in range(0, video_frames.shape[0], 30)]
+    selected_frames = [video_frames[i] for i in range(0, min(video_frames.shape[0], 900), 30)]
     return torch.stack(selected_frames)
 
 
