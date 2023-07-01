@@ -31,7 +31,7 @@ def answer(caption, question):
 
 
 if __name__ == '__main__':
-    path = 'video_samples/test5.mp4'
+    path = 'video_samples/test6.mp4'
     q = 'what is in the video ?'
     frames = read_video(path)
     print(frames.shape)
@@ -42,3 +42,4 @@ if __name__ == '__main__':
         cap += ' ' + c[-1]
 
     print(f'Final caption: {cap}')
+    answer(cap, q)
