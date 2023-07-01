@@ -8,14 +8,11 @@ def read_video(video_path):
     video_reader = torchvision.io.VideoReader(video_path, stream)
     fms = [frame['data'] for frame in video_reader]
     video_frames = torch.stack(fms)
-    selected_frames = [video_frames[i] for i in range(0, video_frames.shape[0], 30)]
+    selected_frames = [video_frames[i] for i in range(0, min(video_frames.shape[0], 900), 30)]
     return torch.stack(selected_frames)
 
 
 if __name__ == '__main__':
-    path = 'video_samples/test3.mp4'
+    path = 'video_samples/test4.mp4'
     frames = read_video(path)
-    for i in range(frames.shape[0]):
-        plt.imshow(frames[i].permute(1, 2, 0))
-        plt.show()
     print(frames.shape)

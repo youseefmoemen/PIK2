@@ -14,15 +14,20 @@ def read_video(video_path):
 
 
 def answer(caption, question):
-    openai.api_key = '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'
-    prompt = f'Answer the question using the caption ' \
-             f'Question: {question}, caption: {caption}'
-    response = openai.Completion.create(
-        engine='text-davinci-003',
-        prompt=prompt,
-        max_tokens=100,
+    openai.api_key = ''  # Add your API key here
+    prompt = f"the following text is video caption answer the following question:  {question} using the provided " \
+             f"caption: {caption}"
+    messages = [{
+        'role': 'user',
+        'content': prompt
+    }]
+
+    chat = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo", messages=messages
     )
-    return response
+    reply = chat.choices[0].message.content
+    print(f'Question: {question}')
+    print(f'Answer: {reply}')
 
 
 if __name__ == '__main__':
@@ -37,5 +42,3 @@ if __name__ == '__main__':
         cap += ' ' + c[-1]
 
     print(f'Final caption: {cap}')
-    final_answer = answer(cap, q)
-    print(f'question answer: {final_answer}')
