@@ -31,8 +31,8 @@ def answer(caption, question):
 
 
 if __name__ == '__main__':
-    path = 'video_samples/test2.mp4'
-    q = 'what is the ingredients in the pizza?'
+    path = 'video_samples/test5.mp4'
+    q = 'what is in the video ?'
     frames = read_video(path)
     print(frames.shape)
     pik = PIK()
