@@ -13,6 +13,6 @@ def read_video(video_path):
 
 
 if __name__ == '__main__':
-    path = 'video_samples/test5.mp4'
+    path = 'video_samples/test7.mp4'
     frames = read_video(path)
     print(frames.shape)

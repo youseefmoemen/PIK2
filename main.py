@@ -31,7 +31,7 @@ def answer(caption, question):
 
 
 if __name__ == '__main__':
-    path = 'video_samples/test6.mp4'
+    path = 'video_samples/test7.mp4'
     q = 'what is in the video ?'
     frames = read_video(path)
     print(frames.shape)
